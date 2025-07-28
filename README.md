@@ -3,7 +3,6 @@
 - Stworzyć config w zależności od środowiska (profile)
   - profile PROD -> baza danych MYSQL (pusta baza danych)
   - profile DEV -> lokalna baza danych H2 (wypełniona przykładowymi danymi)
-#### Potencjalne rozwiązania
 
 # Rozwiązanie zadania krok po kroku
 
