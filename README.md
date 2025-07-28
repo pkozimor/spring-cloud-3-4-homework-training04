@@ -6,6 +6,13 @@
 
 # Rozwiązanie zadania krok po kroku
 
-## Stwórz eureka-server (new module)
+### 1. Stwórz eureka-server (new module)
 - dependency spring-web
 - dependency eureka server
+- add annotation @EnableEurekaServer
+- add configuration in application.properties
+```
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.register-fetch-registry=false
+```
