@@ -1,12 +1,12 @@
-# Zadanie domowe
-### Stworzyć 2 mikroserwisy, które będą korzystały z Spring Cloud Config Server.
-- Stworzyć config w zależności od środowiska (profile)
-  - profile PROD -> baza danych MYSQL (pusta baza danych)
-  - profile DEV -> lokalna baza danych H2 (wypełniona przykładowymi danymi)
+# Homework - Spring Cloud 3.4 - Training04 - Configuration
+### Create 2 services, which will use Spring Cloud Config Server and Eureka Server
+- Use two different profiles
+  - profile PROD -> db MYSQL (empty db)
+  - profile DEV -> local db H2 (fulfilled with sample data)
 
-# Rozwiązanie zadania krok po kroku
+# Steb by step (solution)
 
-### 1. Stwórz eureka-server (new module)
+### 1. Create eureka-server (new module)
 - add dependency spring-web
 - add dependency eureka-server
 - add annotation `@EnableEurekaServer`
@@ -17,7 +17,7 @@ eureka.client.register-with-eureka=false
 eureka.client.register-fetch-registry=false
 ```
 
-### 1. Stwórz config-server (new module)
+### 1. Create config-server (new module)
 - add dependency spring-web
 - add dependency spring-cloud-config-server
 - add annotation `@EnableConfigServer`
@@ -32,7 +32,7 @@ spring.cloud.config.server.git.password=${GIT_TOKEN}
 spring.cloud.config.server.git.clone-on-start=true
 ```
 
-### 2. Stwórz ms1 (new module)
+### 2. Create ms1 (new module)
 - add dependency spring-web
 - add dependency spring-config-client (spring-cloud-starter-config)
 - add dependency spring-eureka-client (spring-cloud-starter-netflix-eureka-client)
