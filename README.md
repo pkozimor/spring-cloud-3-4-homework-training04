@@ -17,7 +17,7 @@ eureka.client.register-with-eureka=false
 eureka.client.register-fetch-registry=false
 ```
 
-### 1. Create config-server (new module)
+### 2. Create config-server (new module)
 - add dependency spring-web
 - add dependency spring-cloud-config-server
 - add annotation `@EnableConfigServer`
@@ -32,7 +32,7 @@ spring.cloud.config.server.git.password=${GIT_TOKEN}
 spring.cloud.config.server.git.clone-on-start=true
 ```
 
-### 2. Create ms1 (new module)
+### 3. Create ms1 (new module)
 - add dependency spring-web
 - add dependency spring-config-client (spring-cloud-starter-config)
 - add dependency spring-eureka-client (spring-cloud-starter-netflix-eureka-client)
