@@ -84,3 +84,46 @@ spring.h2.console.settings.web-allow-others=true
 - create sample java code and endpoints to test connection to H2 and MySQL databases `Content, ContentRepository, ContentController`
 - create POST request to test adding content to the database
 
+### 5. Create ms2 (new module)
+- add dependency spring-web
+- add dependency spring-config-client (spring-cloud-starter-config)
+- add dependency spring-eureka-client (spring-cloud-starter-netflix-eureka-client)
+- add dependency spring-boot-starter-data-jpa
+- add dependency mysql-connector-java
+- add dependency h2
+- optionally add annotation `@EnableDiscoveryClient` (not required since Spring Cloud 1.4.0)
+- add basic configuration in `application.properties`
+```
+spring.application.name=ms1
+spring.config.import=optional:configserver:http://localhost:8888
+spring.profiles.active=dev
+```
+- add basic configuration for basic profile within external config repository `ms2.properties`
+```
+eureka.instance.appname=${spring.application.name}
+eureka.instance.instance-id=${spring.application.name}:${random.uuid}
+server.port=0
+```
+- add configuration for PROD profile within external config repository `ms2-prod.properties`
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/content_db
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=never
+```
+- add configuration for DEV profile within external config repository `ms2-dev.properties`
+```
+spring.datasource.url=jdbc:h2:mem:content_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=always
+spring.h2.console.enabled=true
+spring.h2.console.settings.web-allow-others=true
+```
+- 
