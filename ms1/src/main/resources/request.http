@@ -1,0 +1,8 @@
+### Dodaj nowy wpis
+POST http://192.168.1.12:43121//api/content
+Content-Type: application/json
+
+{
+  "title": "Nowy testowy wpis",
+  "tag": "test"
+}
