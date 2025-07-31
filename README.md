@@ -46,3 +46,41 @@ server.port=0
 
 spring.config.import=configserver:http://localhost:8888
 ```
+.
+### 4. Configure PROD, DEV profiles and database connections for ms1 service
+- add dependency spring-boot-starter-data-jpa
+- add dependency mysql-connector-java
+- create dedicated basic configuration file for ms1 service called `ms1.properties` within remote config repository https://github.com/pkozimor/spring-cloud-3-4-homework-training04-configuration
+- move basic configuration from `application.properties` to `ms1.properties`
+```
+eureka.instance.appname=${spring.application.name}
+eureka.instance.instance-id=${spring.application.name}:${random.uuid}
+server.port=0
+```
+- create dedicated configuration for PROD profile for ms1 service called `ms1-prod.properties` within remote config repository https://github.com/pkozimor/spring-cloud-3-4-homework-training04-configuration
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/content_db
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=never
+```
+- add dependency h2
+- create dedicated configuration for DEV profile for ms1 service called `ms1-dev.properties` within remote config repository https://github.com/pkozimor/spring-cloud-3-4-homework-training04-configuration
+```aiignore
+spring.datasource.url=jdbc:h2:mem:content_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.username=sa
+spring.datasource.password=
+spring.datasource.driver-class-name=org.h2.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.defer-datasource-initialization=true
+spring.sql.init.mode=always
+spring.h2.console.enabled=true
+spring.h2.console.settings.web-allow-others=true
+```
+- add sql file with random data to fill DEV profile `data.sql`
+- create sample java code and endpoints to test connection to H2 and MySQL databases `Content, ContentRepository, ContentController`
+- create POST request to test adding content to the database
+
